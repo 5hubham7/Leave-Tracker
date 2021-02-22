@@ -22,7 +22,11 @@ function getAllGroups(req, res) {
 function getGroupById(req, res) {
     groupService
         .getById(req.params.id)
-        .then((group) => (group ? res.json(group) : res.sendStatus(404)))
+        .then((group) =>
+            group
+                ? res.json({ status: 405, error: null, response: group })
+                : res.sendStatus(404)
+        )
         .catch((err) => res.json({ status: 405, error: err, response: null }));
 }
 
