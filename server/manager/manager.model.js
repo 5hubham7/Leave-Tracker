@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-    manager_email: { type: String, unique: true, required: true },
+    manager_email: { type: String, unique: true },
     password: { type: String, required: true },
-    manager_name: { type: String, required: true },
-    manager_phone: { type: String, required: true },
+    manager_name: { type: String },
+    manager_phone: { type: String },
     created_date: { type: Date, default: Date.now },
 });
 

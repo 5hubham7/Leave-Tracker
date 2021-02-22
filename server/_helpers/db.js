@@ -14,4 +14,6 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
     Manager: require("../manager/manager.model"),
+    Employee: require("../employee/employee.model"),
+    Group: require("../group/group.model"),
 };

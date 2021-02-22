@@ -31,58 +31,24 @@ app.set("trust proxy", 1);
 
 app.use("/managers", require("./manager/manager.controller"));
 app.use("/employees", require("./employee/employee.controller"));
+app.use("/groups", require("./group/group.controller"));
 
 // OTHER APIS
 
-app.post("/addEmployee", addEmployee);
-app.post("/addGroup", addGroup);
 app.post("/addCountry", addCountry);
 app.post("/addLeave", addLeave);
 app.post("/addRisk", addRisk);
 
-app.get("/getAllEmployees", getAllEmployees);
-app.get("/getAllGroups", getAllGroups);
 app.get("/getAllCountries", getAllCountries);
 app.get("/getAllLeaves", getAllLeaves);
 
-app.get("/getEmployeeById/:employee_id", getEmployeeById);
-app.get("/getGroupById/:group_id", getGroupById);
 app.get("/getCountryById/:country_id", getCountryById);
 app.get("/getLeaveById/:leave_id", getLeaveById);
 app.get("/getLeaveByDate/:start_date/:end_date", getLeaveByDate);
 
-app.delete("/deleteEmployeeById/:employee_id", deleteEmployeeById);
-app.delete("/deleteGroupById/:group_id", deleteGroupById);
 app.delete("/deleteCountryById/:country_id", deleteCountryById);
 app.delete("/deleteLeaveById/:leave_id", deleteLeaveById);
 app.delete("/deleteLeaveByDate/:date", deleteLeaveByDate);
-
-async function addEmployee(req, res) {
-    let data = {
-        employee_name: req.body.employee_name,
-        employee_email: req.body.employee_email,
-        employee_phone: req.body.employee_phone,
-        employee_joining_date: req.body.employee_joining_date,
-        leaves_available: req.body.leaves_available,
-        group_id: req.body.group_id,
-        manager_id: req.body.manager_id,
-        country_id: req.body.country_id,
-    };
-    let result = await mongoService.insertOne("employees", data, "employee_id");
-    res.send(result);
-    console.log(result);
-}
-
-async function addGroup(req, res) {
-    let data = {
-        group_name: req.body.group_name,
-        threshold: req.body.threshold,
-        employees: req.body.employees,
-    };
-    let result = await mongoService.insertOne("groups", data, "group_id");
-    res.send(result);
-    console.log(result);
-}
 
 async function addCountry(req, res) {
     let data = {
@@ -116,18 +82,6 @@ async function addRisk(req, res) {
     console.log(result);
 }
 
-async function getAllEmployees(req, res) {
-    let result = await mongoService.find("employees");
-    res.send(result);
-    console.log(result);
-}
-
-async function getAllGroups(req, res) {
-    let result = await mongoService.find("groups");
-    res.send(result);
-    console.log(result);
-}
-
 async function getAllCountries(req, res) {
     let result = await mongoService.find("countries");
     res.send(result);
@@ -140,32 +94,15 @@ async function getAllLeaves(req, res) {
     console.log(result);
 }
 
-async function getEmployeeById(req, res) {
-    let employee_id = parseInt(req.params.employee_id);
-    let where = {
-        employee_id: employee_id,
-    };
-    let result = await mongoService.findOne("employees", where);
-    res.send(result);
-    console.log(result);
-}
-
-async function getGroupById(req, res) {
-    let group_id = req.params.group_id;
-    let result = await mongoService.findOne("group", group_id);
-    res.send(result);
-    console.log(result);
-}
-
 async function getCountryById(req, res) {
-    let group_id = req.params.country_id;
+    let country_id = req.params.country_id;
     let result = await mongoService.findOne("countries", country_id);
     res.send(result);
     console.log(result);
 }
 
 async function getLeaveById(req, res) {
-    let group_id = req.params.country_id;
+    let leave_id = req.params.country_id;
     let result = await mongoService.findOne("leaves", leave_id);
     res.send(result);
     console.log(result);
@@ -179,22 +116,6 @@ async function getLeaveByDate(req, res) {
         end_date: end_date,
     };
     let result = await mongoService.findOne(where);
-    res.send(result);
-    console.log(result);
-}
-
-async function deleteEmployeeById(req, res) {
-    let employee_id = req.params.employee_id;
-    let result = await mongoService.deleteOne("employees", {
-        employee_id: employee_id,
-    });
-    res.send(result);
-    console.log(result);
-}
-
-async function deleteGroupById(req, res) {
-    let group_id = req.params.group_id;
-    let result = await mongoService.deleteOne("groups", { group_id: group_id });
     res.send(result);
     console.log(result);
 }
@@ -229,12 +150,6 @@ async function deleteLeaveByDate(req, res) {
 // Get all risks from risk collection
 
 // Get all risks of specific date from risk collection
-
-// Add employee to a specific group
-
-// Remove employee from a specific group
-
-// Set threshold of a specific group
 
 // Get public holidays of a specific country
 

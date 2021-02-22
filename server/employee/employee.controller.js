@@ -2,18 +2,20 @@ const express = require("express");
 const app = express();
 const employeeService = require("./employee.service");
 
-app.get("/getAllEmployees", getAllEmployees);
-app.get("/getEmployeeById/:id", getEmployeeById);
-app.put("/updateEmployee/:id", updateEmployee);
-app.delete("/deleteEmployee/:id", deleteEmployee);
+app.get("/", getAllEmployees);
+app.get("/:id", getEmployeeById);
+app.put("/:id", updateEmployee);
+app.delete("/:id", deleteEmployee);
 
 module.exports = app;
 
 function getAllEmployees(req, res) {
     employeeService
         .getAll()
-        .then((employees) => res.json(employees))
-        .catch((err) => res.json({ error: err }));
+        .then((employees) =>
+            res.json({ status: 200, error: null, response: employees })
+        )
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function getEmployeeById(req, res) {
@@ -22,19 +24,19 @@ function getEmployeeById(req, res) {
         .then((employee) =>
             employee ? res.json(employee) : res.sendStatus(404)
         )
-        .catch((err) => res.json({ error: err }));
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function updateEmployee(req, res) {
     employeeService
         .update(req.params.id, req.body)
-        .then(() => res.json({}))
-        .catch((err) => res.json({ error: err }));
+        .then(() => res.json({ status: 200, error: null, response: "updated" }))
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function deleteEmployee(req, res) {
     employeeService
         .delete(req.params.id)
-        .then(() => res.json({}))
-        .catch((err) => res.json({ error: err }));
+        .then(() => res.json({ status: 200, error: null, response: "deleted" }))
+        .catch((err) => res.json({ status: 405, error: err }));
 }

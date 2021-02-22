@@ -14,41 +14,39 @@ async function getAll() {
     return await Employee.find();
 }
 
-async function getById(id) {
-    return await Employee.findById(id);
+async function getById(employee_id) {
+    return await Employee.findById(employee_id);
 }
 
 async function create(employeeParam) {
-    // validate
     if (
         await Employee.findOne({ employee_email: employeeParam.employee_email })
     ) {
-        throw "Email '" + employeeParam.employee_email + "' is already taken";
+        throw new Error(
+            "Email '" + employeeParam.employee_email + "' is already taken"
+        );
     }
     const employee = new Employee(employeeParam);
     if (employeeParam.password) {
         employee.password = bcrypt.hashSync(employeeParam.password, 10);
     }
-
-    // save employee
     await employee.save();
 }
 
-async function update(id, employeeParam) {
-    const employee = await Employee.findById(id);
+async function update(employee_id, employeeParam) {
+    const employee = await Employee.findById(employee_id);
 
-    // validate
-    if (!employee) throw "Employee not found";
+    if (!employee) throw new Error("Employee not found");
     if (
         employee.employee_email !== employeeParam.employee_email &&
         (await Employee.findOne({
             employee_email: employeeParam.employee_email,
         }))
     ) {
-        throw (
+        throw new Error(
             'Employee Email "' +
-            employeeParam.employee_email +
-            '" is already taken'
+                employeeParam.employee_email +
+                '" is already taken'
         );
     }
 
@@ -61,6 +59,6 @@ async function update(id, employeeParam) {
     await employee.save();
 }
 
-async function _delete(id) {
-    await Employee.findByIdAndRemove(id);
+async function _delete(employee_id) {
+    await Employee.findByIdAndRemove(employee_id);
 }

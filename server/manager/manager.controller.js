@@ -4,11 +4,11 @@ const managerService = require("./manager.service");
 
 app.post("/authenticate", authenticate);
 app.post("/register", register);
-app.get("/getAllManagers", getAllManagers);
 app.get("/getCurrentManager", getCurrentManager);
-app.get("/getManagerById/:id", getManagerById);
-app.put("/updateManager/:id", updateManager);
-app.delete("/deleteManager/:id", deleteManager);
+app.get("/", getAllManagers);
+app.get("/:manager_id", getManagerById);
+app.put("/:manager_id", updateManager);
+app.delete("/:manager_id", deleteManager);
 
 module.exports = app;
 
@@ -17,8 +17,11 @@ function authenticate(req, res, next) {
         .authenticate(req.body)
         .then((manager) =>
             manager
-                ? res.json(manager)
-                : res.json({ error: "Email or password is incorrect!" })
+                ? res.json({ status: 200, error: null, response: manager })
+                : res.json({
+                      status: 405,
+                      error: "Email or password is incorrect!",
+                  })
         )
         .catch((err) => next(err));
 }
@@ -26,41 +29,53 @@ function authenticate(req, res, next) {
 function register(req, res) {
     managerService
         .create(req.body)
-        .then(() => res.json({ registered: true }))
-        .catch((err) => res.json({ error: err }));
+        .then(() =>
+            res.json({ status: 200, error: null, response: "registered" })
+        )
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function getAllManagers(req, res) {
     managerService
         .getAll()
-        .then((managers) => res.json(managers))
-        .catch((err) => res.json({ error: err }));
+        .then((managers) =>
+            res.json({ status: 200, error: null, response: managers })
+        )
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function getCurrentManager(req, res) {
     managerService
         .getById(req.manager.sub)
-        .then((manager) => (manager ? res.json(manager) : res.sendStatus(404)))
-        .catch((err) => res.json({ error: err }));
+        .then((manager) =>
+            manager
+                ? res.json({ status: 200, error: null, response: manager })
+                : res.sendStatus(404)
+        )
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function getManagerById(req, res) {
     managerService
-        .getById(req.params.id)
-        .then((manager) => (manager ? res.json(manager) : res.sendStatus(404)))
+        .getById(req.params.manager_id)
+        .then((manager) =>
+            manager
+                ? res.json({ status: 200, error: null, response: manager })
+                : res.sendStatus(404)
+        )
         .catch((err) => res.json({ error: err }));
 }
 
 function updateManager(req, res) {
     managerService
-        .update(req.params.id, req.body)
-        .then(() => res.json({}))
-        .catch((err) => res.json({ error: err }));
+        .update(req.params.manager_id, req.body)
+        .then(() => res.json({ status: 200, error: null, response: "updated" }))
+        .catch((err) => res.json({ statusL: 405, error: err }));
 }
 
 function deleteManager(req, res) {
     managerService
-        .delete(req.params.id)
-        .then(() => res.json({}))
-        .catch((err) => res.json({ error: err }));
+        .delete(req.params.manager_id)
+        .then(() => res.json({ status: 200, error: null, response: "deleted" }))
+        .catch((err) => res.json({ status: 405, error: err }));
 }

@@ -30,17 +30,16 @@ async function getAll() {
     return await Manager.find();
 }
 
-async function getById(id) {
-    return await Manager.findById(id);
+async function getById(manager_id) {
+    return await Manager.findById(manager_id);
 }
 
 async function create(managerParam) {
-    // validate
     if (await Manager.findOne({ manager_email: managerParam.manager_email })) {
-        throw (
+        throw new Error(
             "Manager Email '" +
-            managerParam.manager_email +
-            "' is already taken"
+                managerParam.manager_email +
+                "' is already taken"
         );
     }
     const manager = new Manager(managerParam);
@@ -48,23 +47,21 @@ async function create(managerParam) {
         manager.password = bcrypt.hashSync(managerParam.password, 10);
     }
 
-    // save manager
     await manager.save();
 }
 
-async function update(id, managerParam) {
-    const manager = await Manager.findById(id);
+async function update(manager_id, managerParam) {
+    const manager = await Manager.findOne({ manager_id: parseInt(manager_id) });
 
-    // validate
-    if (!manager) throw "Manager not found";
+    if (!manager) throw new Error("Manager not found");
     if (
         manager.manager_email !== managerParam.manager_email &&
         (await Manager.findOne({ manager_email: managerParam.manager_email }))
     ) {
-        throw (
+        throw new Error(
             'Manager Email "' +
-            managerParam.manager_email +
-            '" is already taken'
+                managerParam.manager_email +
+                '" is already taken'
         );
     }
 
@@ -77,6 +74,6 @@ async function update(id, managerParam) {
     await manager.save();
 }
 
-async function _delete(id) {
-    await Manager.findByIdAndRemove(id);
+async function _delete(manager_id) {
+    await Manager.findByIdAndRemove(manager_id);
 }
