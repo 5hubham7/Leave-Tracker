@@ -1,0 +1,55 @@
+/* NAVBAR HEADER */
+
+.h2 {
+    letter-spacing: 2rem;
+}
+
+/* SIDE NAVIGATION TWEAKS */
+ol,
+ul {
+    padding: 0;
+}
+
+.side-navigation-panel-select-option-wrap,
+.font-medium {
+    color: black;
+    font-weight: 600;
+}
+
+.border-pink-500 {
+    border-color: black;
+}
+
+.border-l-2 {
+    border-left-width: 3px;
+}
+
+/* CALENDAR TWEAKS */
+
+a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.fc-view-harness {
+    flex-grow: 1;
+    position: relative;
+    background-color: darkgray;
+}
+
+.fc-header-toolbar {
+    background-color: dimgray;
+}
+
+.fc-button-primary,
+.fc-button-primary:disabled {
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: black;
+}
+
+.fc-toolbar-title {
+    font-weight: bold;
+    color: white;
+}
