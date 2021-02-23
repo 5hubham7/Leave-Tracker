@@ -15,7 +15,7 @@ async function getAll() {
 }
 
 async function getById(employee_id) {
-    return await Employee.findById(employee_id);
+    return await Employee.findOne({ employee_id: employee_id });
 }
 
 async function create(employeeParam) {
