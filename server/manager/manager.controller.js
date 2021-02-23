@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const managerService = require("./manager.service");
 
-// app.post("/authenticate", authenticate);
 app.post("/authenticate", authenticate);
 app.post("/register", register);
 app.get("/", getAllManagers);
