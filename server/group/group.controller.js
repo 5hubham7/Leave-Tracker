@@ -2,13 +2,22 @@ const express = require("express");
 const app = express();
 const groupService = require("./group.service");
 
+app.post("/", createGroup);
 app.get("/", getAllGroups);
 app.get("/:group_id", getGroupById);
 app.put("/:group_id", updateGroup);
 app.delete("/:group_id", deleteGroup);
+app.post("/add/:group_id/:employee_id", add);
 app.delete("/remove/:group_id/:employee_id", remove);
 
 module.exports = app;
+
+function createGroup(req, res) {
+    groupService
+        .create(req.body)
+        .then(() => res.json({ status: 200, error: null, response: "created" }))
+        .catch((err) => res.json({ status: 405, error: err }));
+}
 
 function getAllGroups(req, res) {
     groupService
@@ -41,6 +50,13 @@ function deleteGroup(req, res) {
     groupService
         .delete(req.params.group_id)
         .then(() => res.json({ status: 200, error: null, response: "deleted" }))
+        .catch((err) => res.json({ status: 405, error: err, response: null }));
+}
+
+function add(req, res) {
+    groupService
+        .add(req.params.group_id, req.params.employee_id)
+        .then(() => res.json({ status: 200, error: null, response: "removed" }))
         .catch((err) => res.json({ status: 405, error: err, response: null }));
 }
 

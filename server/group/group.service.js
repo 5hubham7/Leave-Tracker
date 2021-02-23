@@ -6,6 +6,7 @@ module.exports = {
     getById,
     create,
     update,
+    add: add,
     remove: remove,
     delete: _delete,
 };
@@ -47,6 +48,17 @@ async function update(group_id, groupParam) {
     await group.save();
 }
 
+async function add(group_id, employee_id) {
+    await Group.findOneAndUpdate(
+        { group_id: parseInt(group_id) },
+        { $push: { employees: { employee_id: parseInt(employee_id) } } },
+        { safe: true },
+        (err) => {
+            if (err) throw err;
+        }
+    );
+}
+
 async function remove(group_id, employee_id) {
     await Group.findOneAndUpdate(
         { group_id: parseInt(group_id) },
@@ -58,6 +70,6 @@ async function remove(group_id, employee_id) {
     );
 }
 
-async function _delete(id) {
-    await Group.findByIdAndRemove(id);
+async function _delete(group_id) {
+    await Group.findByIdAndRemove(group_id);
 }
