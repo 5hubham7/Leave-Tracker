@@ -2,11 +2,10 @@ const express = require("express");
 const app = express();
 const managerService = require("./manager.service");
 
+// app.post("/authenticate", authenticate);
 app.post("/authenticate", authenticate);
 app.post("/register", register);
-app.get("/getCurrentManager", getCurrentManager);
 app.get("/", getAllManagers);
-app.get("/:manager_id", getManagerById);
 app.put("/:manager_id", updateManager);
 app.delete("/:manager_id", deleteManager);
 
@@ -42,28 +41,6 @@ function getAllManagers(req, res) {
             res.json({ status: 200, error: null, response: managers })
         )
         .catch((err) => res.json({ status: 405, error: err }));
-}
-
-function getCurrentManager(req, res) {
-    managerService
-        .getById(req.manager.sub)
-        .then((manager) =>
-            manager
-                ? res.json({ status: 200, error: null, response: manager })
-                : res.sendStatus(404)
-        )
-        .catch((err) => res.json({ status: 405, error: err }));
-}
-
-function getManagerById(req, res) {
-    managerService
-        .getById(req.params.manager_id)
-        .then((manager) =>
-            manager
-                ? res.json({ status: 200, error: null, response: manager })
-                : res.sendStatus(404)
-        )
-        .catch((err) => res.json({ error: err }));
 }
 
 function updateManager(req, res) {

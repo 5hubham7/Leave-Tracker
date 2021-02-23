@@ -34,7 +34,7 @@ async function create(employeeParam) {
 }
 
 async function update(employee_id, employeeParam) {
-    const employee = await Employee.findById(employee_id);
+    const employee = await Employee.findById({ employee_id: employee_id });
 
     if (!employee) throw new Error("Employee not found");
     if (
@@ -60,5 +60,5 @@ async function update(employee_id, employeeParam) {
 }
 
 async function _delete(employee_id) {
-    await Employee.findByIdAndRemove(employee_id);
+    await Employee.findByIdAndRemove({ employee_id: employee_id });
 }

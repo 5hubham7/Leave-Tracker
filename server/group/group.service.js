@@ -71,5 +71,5 @@ async function remove(group_id, employee_id) {
 }
 
 async function _delete(group_id) {
-    await Group.findByIdAndRemove(group_id);
+    await Group.findByIdAndRemove({ group_id: group_id });
 }

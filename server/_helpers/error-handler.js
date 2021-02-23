@@ -1,17 +1,21 @@
+module.exports = errorHandler;
+
 function errorHandler(err, req, res, next) {
     if (typeof err === "string") {
-        return res.json({ status: 400, error: err, response: null });
+        // custom application error
+        return res.status(400).json({ message: err });
     }
 
     if (err.name === "ValidationError") {
-        return res.json({ status: 400, error: err.message, response: null });
+        // mongoose validation error
+        return res.status(400).json({ message: err.message });
     }
 
     if (err.name === "UnauthorizedError") {
-        return res.json({ status: 401, error: err.message, response: null });
+        // jwt authentication error
+        return res.status(401).json({ message: "Invalid Token" });
     }
 
-    return res.json({ status: 500, error: err.message, response: null });
+    // default to 500 server error
+    return res.status(500).json({ message: err.message });
 }
-
-module.exports = errorHandler;

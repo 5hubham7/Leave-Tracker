@@ -1,5 +1,5 @@
-const config = require("../config.json");
 const expressJwt = require("express-jwt");
+const config = require("../config.json");
 const managerService = require("../manager/manager.service");
 
 module.exports = jwt;
@@ -13,9 +13,9 @@ function jwt() {
 
 async function isRevoked(req, payload, done) {
     const manager = await managerService.getById(payload.sub);
-
     if (!manager) {
         return done(null, true);
     }
+
     done();
 }

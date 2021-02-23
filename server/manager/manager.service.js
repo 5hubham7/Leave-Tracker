@@ -75,5 +75,5 @@ async function update(manager_id, managerParam) {
 }
 
 async function _delete(manager_id) {
-    await Manager.findByIdAndRemove(manager_id);
+    await Manager.findByIdAndRemove({ manager_id: parseInt(manager_id) });
 }
