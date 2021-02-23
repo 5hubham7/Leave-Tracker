@@ -9,6 +9,7 @@ module.exports = {
     add: add,
     remove: remove,
     delete: _delete,
+    getEmployeeDetails: getEmployeeDetails,
 };
 
 async function getAll() {
@@ -71,5 +72,9 @@ async function remove(group_id, employee_id) {
 }
 
 async function _delete(group_id) {
-    await Group.findByIdAndRemove({ group_id: group_id });
+    await Group.findOneAndRemove({ group_id: parseInt(group_id) });
+}
+
+async function getEmployeeDetails(group_id) {
+    return await Group.findOne({ group_id: parseInt(group_id) });
 }

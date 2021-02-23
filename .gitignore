@@ -6,6 +6,8 @@
 /.pnp
 .pnp.js
 /server/node_modules
+/mysql-server/node_modules
+/mysql-jwt/node_modules
 
 # testing
 /coverage
