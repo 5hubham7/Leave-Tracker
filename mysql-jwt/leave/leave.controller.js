@@ -34,14 +34,26 @@ function create(req, res, next) {
 function getAll(req, res, next) {
     leaveService
         .getAll()
-        .then((leaves) => res.json(leaves))
+        .then((leaves) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: leaves,
+            })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     leaveService
         .getById(req.params.id)
-        .then((leave) => res.json(leave))
+        .then((leave) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: leave,
+            })
+        )
         .catch(next);
 }
 
@@ -57,13 +69,25 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     leaveService
         .update(req.params.id, req.body)
-        .then((leave) => res.json(leave))
+        .then((leave) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: leave,
+            })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     leaveService
         .delete(req.params.id)
-        .then(() => res.json({ message: "Leave deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully",
+            })
+        )
         .catch(next);
 }

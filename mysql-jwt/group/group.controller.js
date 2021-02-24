@@ -26,21 +26,31 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     groupService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Added successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     groupService
         .getAll()
-        .then((groups) => res.json(groups))
+        .then((groups) =>
+            res.json({ status: 200, error: null, response: groups })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     groupService
         .getById(req.params.id)
-        .then((group) => res.json(group))
+        .then((group) =>
+            res.json({ status: 200, error: null, response: group })
+        )
         .catch(next);
 }
 
@@ -55,13 +65,21 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     groupService
         .update(req.params.id, req.body)
-        .then((group) => res.json(group))
+        .then((group) =>
+            res.json({ status: 200, error: null, response: group })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     groupService
         .delete(req.params.id)
-        .then(() => res.json({ message: "Group deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully",
+            })
+        )
         .catch(next);
 }

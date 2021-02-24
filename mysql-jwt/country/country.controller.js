@@ -25,21 +25,31 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     countryService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Added successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     countryService
         .getAll()
-        .then((countries) => res.json(countries))
+        .then((countries) =>
+            res.json({ status: 200, error: null, response: countries })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     countryService
         .getById(req.params.id)
-        .then((country) => res.json(country))
+        .then((country) =>
+            res.json({ status: 200, error: null, response: country })
+        )
         .catch(next);
 }
 
@@ -53,13 +63,21 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     countryService
         .update(req.params.id, req.body)
-        .then((country) => res.json(country))
+        .then((country) =>
+            res.json({ status: 200, error: null, response: country })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     countryService
         .delete(req.params.id)
-        .then(() => res.json({ message: "Country deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
+        )
         .catch(next);
 }

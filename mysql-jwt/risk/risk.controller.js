@@ -28,21 +28,39 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     riskService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Added successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     riskService
         .getAll()
-        .then((risks) => res.json(risks))
+        .then((risks) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: risks,
+            })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     riskService
         .getById(req.params.risk_id)
-        .then((risk) => res.json(risk))
+        .then((risk) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: risk,
+            })
+        )
         .catch(next);
 }
 
@@ -59,13 +77,25 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     riskService
         .update(req.params.risk_id, req.body)
-        .then((risk) => res.json(risk))
+        .then((risk) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: risk,
+            })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     riskService
         .delete(req.params.risk_id)
-        .then(() => res.json({ message: "Risk deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
+        )
         .catch(next);
 }

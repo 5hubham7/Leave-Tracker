@@ -30,21 +30,31 @@ function registerSchema(req, res, next) {
 function register(req, res, next) {
     employeeService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Registered successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     employeeService
         .getAll()
-        .then((employees) => res.json(employees))
+        .then((employees) =>
+            res.json({ status: 200, error: null, response: employees })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     employeeService
         .getById(req.params.id)
-        .then((employee) => res.json(employee))
+        .then((employee) =>
+            res.json({ status: 200, error: null, response: employee })
+        )
         .catch(next);
 }
 
@@ -63,13 +73,21 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     employeeService
         .update(req.params.id, req.body)
-        .then((employee) => res.json(employee))
+        .then((employee) =>
+            res.json({ status: 200, error: null, response: employee })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     employeeService
         .delete(req.params.id)
-        .then(() => res.json({ message: "Employee deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
+        )
         .catch(next);
 }

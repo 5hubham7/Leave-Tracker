@@ -27,7 +27,9 @@ function authenticateSchema(req, res, next) {
 function authenticate(req, res, next) {
     managerService
         .authenticate(req.body)
-        .then((manager) => res.json(manager))
+        .then((manager) =>
+            res.json({ status: 200, error: null, response: manager })
+        )
         .catch(next);
 }
 
@@ -44,14 +46,22 @@ function registerSchema(req, res, next) {
 function register(req, res, next) {
     managerService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Registered successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     managerService
         .getAll()
-        .then((managers) => res.json(managers))
+        .then((managers) =>
+            res.json({ status: 200, error: null, response: managers })
+        )
         .catch(next);
 }
 
@@ -62,7 +72,9 @@ function getCurrent(req, res, next) {
 function getById(req, res, next) {
     managerService
         .getById(req.params.manager_id)
-        .then((manager) => res.json(manager))
+        .then((manager) =>
+            res.json({ status: 200, error: null, response: manager })
+        )
         .catch(next);
 }
 
@@ -79,13 +91,21 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     managerService
         .update(req.params.manager_id, req.body)
-        .then((manager) => res.json(manager))
+        .then((manager) =>
+            res.json({ status: 200, error: null, response: manager })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
     managerService
         .delete(req.params.manager_id)
-        .then(() => res.json({ message: "User deleted successfully" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
+        )
         .catch(next);
 }

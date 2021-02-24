@@ -3,63 +3,83 @@ const router = express.Router();
 const Joi = require("joi");
 const validateRequest = require("../_middleware/validate-request");
 const authorize = require("../_middleware/authorize");
-const countryService = require("./empgrp.service");
+const empgrpService = require("./empgrp.service");
 
 // routes
 
 router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
-router.get("/:id", authorize(), getById);
-router.put("/:id", authorize(), updateSchema, update);
-router.delete("/:id", authorize(), _delete);
+router.get("/:empgrp_id", authorize(), getById);
+router.put("/:empgrp_id", authorize(), updateSchema, update);
+router.delete("/:empgrp_id", authorize(), _delete);
 
 module.exports = router;
 
 function createSchema(req, res, next) {
     const schema = Joi.object({
-        country_name: Joi.string().required(),
+        group_id: Joi.number().required(),
+        employee_id: Joi.number().required(),
     });
     validateRequest(req, next, schema);
 }
 
 function create(req, res, next) {
-    countryService
+    empgrpService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Addedd successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
-    countryService
+    empgrpService
         .getAll()
-        .then((countries) => res.json(countries))
+        .then((empgrps) =>
+            res.json({ status: 200, error: null, response: empgrps })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
-    countryService
-        .getById(req.params.id)
-        .then((country) => res.json(country))
+    empgrpService
+        .getById(req.params.empgrp_id)
+        .then((empgrp) =>
+            res.json({ status: 200, error: null, response: empgrp })
+        )
         .catch(next);
 }
 
 function updateSchema(req, res, next) {
     const schema = Joi.object({
-        country_name: Joi.string().empty(""),
+        group_id: Joi.number().empty(),
+        employee_id: Joi.number().empty(),
     });
     validateRequest(req, next, schema);
 }
 
 function update(req, res, next) {
-    countryService
-        .update(req.params.id, req.body)
-        .then((country) => res.json(country))
+    empgrpService
+        .update(req.params.empgrp_id, req.body)
+        .then((empgrp) =>
+            res.json({ status: 200, error: null, response: empgrp })
+        )
         .catch(next);
 }
 
 function _delete(req, res, next) {
-    countryService
-        .delete(req.params.id)
-        .then(() => res.json({ message: "Country deleted successfully" }))
+    empgrpService
+        .delete(req.params.empgrp_id)
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
+        )
         .catch(next);
 }

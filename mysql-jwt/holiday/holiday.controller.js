@@ -27,21 +27,31 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     holidayService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({
+                status: 200,
+                error: null,
+                response: "Added successfully!",
+            })
+        )
         .catch(next);
 }
 
 function getAll(req, res, next) {
     holidayService
         .getAll()
-        .then((countries) => res.json(countries))
+        .then((holidays) =>
+            res.json({ status: 200, error: null, response: holidays })
+        )
         .catch(next);
 }
 
 function getById(req, res, next) {
     holidayService
         .getById(req.params.id)
-        .then((holiday) => res.json(holiday))
+        .then((holiday) =>
+            res.json({ status: 200, error: null, response: holiday })
+        )
         .catch(next);
 }
 
@@ -57,7 +67,13 @@ function updateSchema(req, res, next) {
 function update(req, res, next) {
     holidayService
         .update(req.params.id, req.body)
-        .then((holiday) => res.json(holiday))
+        .then((holiday) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: holiday,
+            })
+        )
         .catch(next);
 }
 
@@ -65,7 +81,11 @@ function _delete(req, res, next) {
     holidayService
         .delete(req.params.id)
         .then(() =>
-            res.json({ message: "Public Holiday deleted successfully" })
+            res.json({
+                status: 200,
+                error: null,
+                response: "Deleted successfully!",
+            })
         )
         .catch(next);
 }
