@@ -43,7 +43,7 @@ function registerSchema(req, res, next) {
     validateRequest(req, next, schema);
 }
 
-function register(req, res, next) {
+function register(req, res) {
     managerService
         .create(req.body)
         .then(() =>
@@ -53,7 +53,7 @@ function register(req, res, next) {
                 response: "Registered successfully!",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err }));
 }
 
 function getAll(req, res, next) {

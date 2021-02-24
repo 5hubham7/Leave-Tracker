@@ -21,8 +21,9 @@ async function authenticate({ manager_email, manager_password }) {
     if (
         !manager ||
         !(await bcrypt.compare(manager_password, manager.manager_password))
-    )
+    ) {
         throw new Error("Email or password is incorrect");
+    }
 
     // authentication successful
     const token = jwt.sign({ sub: manager.manager_id }, config.secret, {
@@ -49,9 +50,7 @@ async function create(params) {
             where: { manager_email: params.manager_email },
         })
     ) {
-        throw new Error(
-            'Email "' + params.manager_email + '" is already taken'
-        );
+        throw 'Email "' + params.manager_email + '" is already taken';
     }
 
     // hash password
@@ -78,9 +77,7 @@ async function update(id, params) {
             where: { manager_email: params.manager_email },
         }))
     ) {
-        throw new Error(
-            'Managername "' + params.manager_email + '" is already taken'
-        );
+        throw 'Managername "' + params.manager_email + '" is already taken';
     }
 
     // hash password if it was entered

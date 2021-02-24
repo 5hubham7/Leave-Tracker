@@ -36,9 +36,7 @@ async function update(group_id, params) {
             where: { group_name: params.group_name },
         }))
     ) {
-        throw new Error(
-            'Groupname "' + params.group_name + '" is already taken'
-        );
+        throw 'Groupname "' + params.group_name + '" is already taken';
     }
 
     Object.assign(group, params);

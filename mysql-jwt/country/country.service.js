@@ -36,9 +36,7 @@ async function update(country_id, params) {
             where: { country_name: params.country_name },
         }))
     ) {
-        throw new Error(
-            'Countryname "' + params.country_name + '" is already taken'
-        );
+        throw 'Countryname "' + params.country_name + '" is already taken';
     }
 
     Object.assign(country, params);

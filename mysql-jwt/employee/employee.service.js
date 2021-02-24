@@ -28,9 +28,7 @@ async function create(params) {
             where: { employee_email: params.employee_email },
         })
     ) {
-        throw new Error(
-            'Email "' + params.employee_email + '" is already taken'
-        );
+        throw 'Email "' + params.employee_email + '" is already taken';
     }
 
     // hash password
@@ -55,9 +53,7 @@ async function update(employee_id, params) {
             where: { employee_email: params.employee_email },
         }))
     ) {
-        throw new Error(
-            'Employeename "' + params.employee_email + '" is already taken'
-        );
+        throw 'Employeename "' + params.employee_email + '" is already taken';
     }
 
     // hash password if it was entered
