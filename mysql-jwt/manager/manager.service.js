@@ -1,7 +1,7 @@
-﻿const config = require("config.json");
+﻿const config = require("../config.json");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const db = require("_helpers/db");
+const db = require("../_helpers/db");
 const { QueryTypes } = require("sequelize");
 
 module.exports = {
@@ -25,7 +25,7 @@ async function authenticate({ manager_email, manager_password }) {
         throw new Error("Email or password is incorrect");
 
     // authentication successful
-    const token = jwt.sign({ sub: manager.id }, config.secret, {
+    const token = jwt.sign({ sub: manager.manager_id }, config.secret, {
         expiresIn: "7d",
     });
     return { ...omitHash(manager.get()), token };
@@ -55,8 +55,11 @@ async function create(params) {
     }
 
     // hash password
-    if (params.password) {
-        params.hash = await bcrypt.hash(params.manager_password, 10);
+    if (params.manager_password) {
+        params.manager_password = await bcrypt.hash(
+            params.manager_password,
+            10
+        );
     }
 
     // save manager

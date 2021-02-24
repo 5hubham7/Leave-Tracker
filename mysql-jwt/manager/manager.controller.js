@@ -1,8 +1,8 @@
 ﻿const express = require("express");
 const router = express.Router();
 const Joi = require("joi");
-const validateRequest = require("_middleware/validate-request");
-const authorize = require("_middleware/authorize");
+const validateRequest = require("../_middleware/validate-request");
+const authorize = require("../_middleware/authorize");
 const managerService = require("./manager.service");
 
 // routes
@@ -10,9 +10,9 @@ router.post("/authenticate", authenticateSchema, authenticate);
 router.post("/register", registerSchema, register);
 router.get("/", authorize(), getAll);
 router.get("/current", authorize(), getCurrent);
-router.get("/:id", authorize(), getById);
-router.put("/:id", authorize(), updateSchema, update);
-router.delete("/:id", authorize(), _delete);
+router.get("/:manager_id", authorize(), getById);
+router.put("/:manager_id", authorize(), updateSchema, update);
+router.delete("/:manager_id", authorize(), _delete);
 
 module.exports = router;
 
@@ -61,7 +61,7 @@ function getCurrent(req, res, next) {
 
 function getById(req, res, next) {
     managerService
-        .getById(req.params.id)
+        .getById(req.params.manager_id)
         .then((manager) => res.json(manager))
         .catch(next);
 }
@@ -78,14 +78,14 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     managerService
-        .update(req.params.id, req.body)
+        .update(req.params.manager_id, req.body)
         .then((manager) => res.json(manager))
         .catch(next);
 }
 
 function _delete(req, res, next) {
     managerService
-        .delete(req.params.id)
+        .delete(req.params.manager_id)
         .then(() => res.json({ message: "User deleted successfully" }))
         .catch(next);
 }

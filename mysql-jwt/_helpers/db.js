@@ -24,6 +24,14 @@ async function initialize() {
 
     // init models and add them to the exported db object
     db.Manager = require("../manager/manager.model")(sequelize);
+    db.Country = require("../country/country.model")(sequelize);
+    db.Group = require("../group/group.model")(sequelize);
+    db.Employee = require("../employee/employee.model")(sequelize);
+    db.EmpGrp = require("../empgrp/empgrp.model")(sequelize);
+    db.PublicHolidays = require("../holiday/holiday.model")(sequelize);
+    db.Leave = require("../leave/leave.model")(sequelize);
+    db.Risk = require("../risk/risk.model")(sequelize);
+
     db.sequelize = sequelize;
 
     // sync all models with database

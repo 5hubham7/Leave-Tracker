@@ -11,6 +11,13 @@ app.use(cors());
 
 // api routes
 app.use("/managers", require("./manager/manager.controller"));
+app.use("/employees", require("./employee/employee.controller"));
+app.use("/countries", require("./country/country.controller"));
+app.use("/groups", require("./group/group.controller"));
+app.use("/leaves", require("./leave/leave.controller"));
+app.use("/risks", require("./risk/risk.controller"));
+app.use("/empgrps", require("./empgrp/empgrp.controller"));
+app.use("/holidays", require("./holiday/holiday.controller"));
 
 // global error handler
 app.use(errorHandler);
