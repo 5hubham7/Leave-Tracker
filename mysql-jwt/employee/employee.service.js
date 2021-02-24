@@ -32,8 +32,11 @@ async function create(params) {
     }
 
     // hash password
-    if (params.password) {
-        params.hash = await bcrypt.hash(params.employee_password, 10);
+    if (params.employee_password) {
+        params.employee_password = await bcrypt.hash(
+            params.employee_password,
+            10
+        );
     }
 
     // save employee
