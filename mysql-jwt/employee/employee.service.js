@@ -83,7 +83,7 @@ async function _delete(employee_id) {
 
 async function getEmployee(employee_id) {
     const employee = await db.Employee.findByPk(employee_id);
-    if (!employee) throw new Error("Employee not found");
+    if (!employee) throw "Employee not found";
     return employee;
 }
 
