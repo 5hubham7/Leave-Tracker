@@ -50,6 +50,6 @@ async function _delete(group_id) {
 
 async function getGroup(group_id) {
     const group = await db.Group.findByPk(group_id);
-    if (!group) throw new Error("Group not found");
+    if (!group) throw "Group not found";
     return group;
 }

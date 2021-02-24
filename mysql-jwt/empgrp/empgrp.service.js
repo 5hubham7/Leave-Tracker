@@ -37,6 +37,6 @@ async function _delete(empgrp_id) {
 
 async function getEmpGrp(empgrp_id) {
     const empgrp = await db.EmpGrp.findByPk(empgrp_id);
-    if (!empgrp) throw new Error("EmpGrp not found");
+    if (!empgrp) throw "EmpGrp not found";
     return empgrp;
 }

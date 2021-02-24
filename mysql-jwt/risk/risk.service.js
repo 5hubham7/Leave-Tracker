@@ -38,6 +38,6 @@ async function _delete(leave_id) {
 
 async function getLeave(leave_id) {
     const leave = await db.Leave.findByPk(leave_id);
-    if (!leave) throw new Error("Leave not found");
+    if (!leave) throw "Leave not found";
     return leave;
 }

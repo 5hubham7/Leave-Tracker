@@ -50,6 +50,6 @@ async function _delete(country_id) {
 
 async function getCountry(country_id) {
     const country = await db.Country.findByPk(country_id);
-    if (!country) throw new Error("Country not found");
+    if (!country) throw "Country not found";
     return country;
 }

@@ -22,7 +22,7 @@ async function authenticate({ manager_email, manager_password }) {
         !manager ||
         !(await bcrypt.compare(manager_password, manager.manager_password))
     ) {
-        throw new Error("Email or password is incorrect");
+        throw "Email or password is incorrect";
     }
 
     // authentication successful
@@ -101,7 +101,7 @@ async function _delete(id) {
 
 async function getManager(id) {
     const manager = await db.Manager.findByPk(id);
-    if (!manager) throw new Error("Manager not found");
+    if (!manager) throw "Manager not found";
     return manager;
 }
 
