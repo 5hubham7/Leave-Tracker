@@ -32,7 +32,7 @@ function create(req, res, next) {
                 response: "Added successfully!",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAll(req, res, next) {
@@ -41,7 +41,7 @@ function getAll(req, res, next) {
         .then((countries) =>
             res.json({ status: 200, error: null, response: countries })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getById(req, res, next) {
@@ -50,7 +50,7 @@ function getById(req, res, next) {
         .then((country) =>
             res.json({ status: 200, error: null, response: country })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function updateSchema(req, res, next) {
@@ -66,7 +66,7 @@ function update(req, res, next) {
         .then((country) =>
             res.json({ status: 200, error: null, response: country })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function _delete(req, res, next) {
@@ -79,5 +79,5 @@ function _delete(req, res, next) {
                 response: "Deleted successfully!",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }

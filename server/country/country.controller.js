@@ -16,7 +16,7 @@ function createCountry(req, res) {
     countryService
         .create(req.body)
         .then(() => res.json({ status: 200, error: null, response: "created" }))
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAllCountries(req, res) {

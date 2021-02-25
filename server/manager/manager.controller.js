@@ -30,7 +30,7 @@ function register(req, res) {
         .then(() =>
             res.json({ status: 200, error: null, response: "registered" })
         )
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAllManagers(req, res) {
@@ -39,7 +39,7 @@ function getAllManagers(req, res) {
         .then((managers) =>
             res.json({ status: 200, error: null, response: managers })
         )
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function updateManager(req, res) {
@@ -53,5 +53,5 @@ function deleteManager(req, res) {
     managerService
         .delete(req.params.manager_id)
         .then(() => res.json({ status: 200, error: null, response: "deleted" }))
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }

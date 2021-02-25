@@ -31,7 +31,7 @@ function create(req, res, next) {
         .then(() =>
             res.json({ status: 200, error: null, response: "Added successful" })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAll(req, res, next) {
@@ -44,7 +44,7 @@ function getAll(req, res, next) {
                 response: leaves,
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getById(req, res, next) {
@@ -57,7 +57,7 @@ function getById(req, res, next) {
                 response: leave,
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getByName(req, res, next) {
@@ -70,7 +70,7 @@ function getByName(req, res, next) {
                 response: leave,
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function updateSchema(req, res, next) {
@@ -92,7 +92,7 @@ function update(req, res, next) {
                 response: leave,
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function _delete(req, res, next) {
@@ -105,5 +105,5 @@ function _delete(req, res, next) {
                 response: "Deleted successfully",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }

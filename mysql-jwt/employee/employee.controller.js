@@ -37,7 +37,7 @@ function register(req, res, next) {
                 response: "Registered successfully!",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAll(req, res, next) {
@@ -46,7 +46,7 @@ function getAll(req, res, next) {
         .then((employees) =>
             res.json({ status: 200, error: null, response: employees })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getById(req, res, next) {
@@ -55,7 +55,7 @@ function getById(req, res, next) {
         .then((employee) =>
             res.json({ status: 200, error: null, response: employee })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function updateSchema(req, res, next) {
@@ -76,7 +76,7 @@ function update(req, res, next) {
         .then((employee) =>
             res.json({ status: 200, error: null, response: employee })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function _delete(req, res, next) {
@@ -89,5 +89,5 @@ function _delete(req, res, next) {
                 response: "Deleted successfully!",
             })
         )
-        .catch(next);
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }

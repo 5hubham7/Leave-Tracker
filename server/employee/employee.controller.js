@@ -14,7 +14,7 @@ function createEmployee(req, res) {
     employeeService
         .create(req.body)
         .then(() => res.json({ status: 200, error: null, response: "created" }))
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getAllEmployees(req, res) {
@@ -23,7 +23,7 @@ function getAllEmployees(req, res) {
         .then((employees) =>
             res.json({ status: 200, error: null, response: employees })
         )
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function getEmployeeById(req, res) {
@@ -32,19 +32,19 @@ function getEmployeeById(req, res) {
         .then((employee) =>
             employee ? res.json(employee) : res.sendStatus(404)
         )
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function updateEmployee(req, res) {
     employeeService
         .update(req.params.employee_id, req.body)
         .then(() => res.json({ status: 200, error: null, response: "updated" }))
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
 function deleteEmployee(req, res) {
     employeeService
         .delete(req.params.employee_id)
         .then(() => res.json({ status: 200, error: null, response: "deleted" }))
-        .catch((err) => res.json({ status: 405, error: err }));
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
