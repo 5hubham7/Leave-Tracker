@@ -9,9 +9,10 @@ const leaveService = require("./leave.service");
 
 router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
-router.get("/:id", authorize(), getById);
-router.put("/:id", authorize(), updateSchema, update);
-router.delete("/:id", authorize(), _delete);
+router.get("/getbyname", authorize(), getByName);
+router.get("/:leave_id", authorize(), getById);
+router.put("/:leave_id", authorize(), updateSchema, update);
+router.delete("/:leave_id", authorize(), _delete);
 
 module.exports = router;
 
@@ -27,7 +28,9 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     leaveService
         .create(req.body)
-        .then(() => res.json({ message: "Registration successful" }))
+        .then(() =>
+            res.json({ status: 200, error: null, response: "Added successful" })
+        )
         .catch(next);
 }
 
@@ -46,7 +49,20 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
     leaveService
-        .getById(req.params.id)
+        .getById(req.params.leave_id)
+        .then((leave) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: leave,
+            })
+        )
+        .catch(next);
+}
+
+function getByName(req, res, next) {
+    leaveService
+        .getByName(req.body.employee_name)
         .then((leave) =>
             res.json({
                 status: 200,
@@ -68,7 +84,7 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     leaveService
-        .update(req.params.id, req.body)
+        .update(req.params.leave_id, req.body)
         .then((leave) =>
             res.json({
                 status: 200,
@@ -81,7 +97,7 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     leaveService
-        .delete(req.params.id)
+        .delete(req.params.leave_id)
         .then(() =>
             res.json({
                 status: 200,

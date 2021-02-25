@@ -4,6 +4,7 @@ const { QueryTypes } = require("sequelize");
 module.exports = {
     getAll,
     getById,
+    getByName,
     create,
     update,
     delete: _delete,
@@ -18,6 +19,17 @@ async function getAll() {
 
 async function getById(leave_id) {
     return await getLeave(leave_id);
+}
+
+async function getByName(employee_name) {
+    return await db.sequelize.query(
+        "SELECT * FROM leaves WHERE employee_id in(SELECT employee_id FROM employees where employee_name = '" +
+            employee_name +
+            "');",
+        {
+            type: QueryTypes.SELECT,
+        }
+    );
 }
 
 async function create(params) {
