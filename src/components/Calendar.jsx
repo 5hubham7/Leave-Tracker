@@ -18,12 +18,10 @@ export default class Calendar extends React.Component {
                 title: "Boring Week",
                 start: "2021-02-07",
                 end: "2021-02-15",
-                color: "green",
             },
             {
                 title: "Shubham on leave",
                 start: "2021-02-25",
-                color: "red",
             },
         ],
     };
@@ -35,9 +33,9 @@ export default class Calendar extends React.Component {
                     <FullCalendar
                         defaultView="dayGridMonth"
                         headerToolbar={{
-                            left: "prev,next today",
+                            left: "prev,next",
                             center: "title",
-                            right: "dayGridMonth,timeGridWeek",
+                            right: "today",
                         }}
                         plugins={[
                             dayGridPlugin,
@@ -51,7 +49,7 @@ export default class Calendar extends React.Component {
                         ref={this.calendarComponentRef}
                         weekends={this.state.calendarWeekends}
                         events={this.state.calendarEvents}
-                        dateClick={this.handleDateClick}
+                        // dateClick={this.handleDateClick}
                         height="490px"
                     />
                 </div>
@@ -59,15 +57,15 @@ export default class Calendar extends React.Component {
         );
     }
 
-    handleDateClick = (arg) => {
-        if (prompt("Would you like to add an event to " + arg.dateStr + " ?")) {
-            this.setState({
-                calendarEvents: this.state.calendarEvents.concat({
-                    title: "New Event",
-                    start: arg.date,
-                    allDay: arg.allDay,
-                }),
-            });
-        }
-    };
+    // handleDateClick = (arg) => {
+    //     if (prompt("Would you like to add an event to " + arg.dateStr + " ?")) {
+    //         this.setState({
+    //             calendarEvents: this.state.calendarEvents.concat({
+    //                 title: "New Event",
+    //                 start: arg.date,
+    //                 allDay: arg.allDay,
+    //             }),
+    //         });
+    //     }
+    // };
 }

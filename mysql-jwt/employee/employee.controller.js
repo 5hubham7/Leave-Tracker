@@ -9,6 +9,7 @@ const employeeService = require("./employee.service");
 
 router.post("/register", registerSchema, register);
 router.get("/", authorize(), getAll);
+router.get("/employeeGroups/:id", authorize(), getEmployeeGroups);
 router.get("/:id", authorize(), getById);
 router.put("/:id", authorize(), updateSchema, update);
 router.delete("/:id", authorize(), _delete);
@@ -43,6 +44,15 @@ function register(req, res, next) {
 function getAll(req, res, next) {
     employeeService
         .getAll()
+        .then((employees) =>
+            res.json({ status: 200, error: null, response: employees })
+        )
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
+}
+
+function getEmployeeGroups(req, res, next) {
+    employeeService
+        .getEmployeeGroups(req.params.id)
         .then((employees) =>
             res.json({ status: 200, error: null, response: employees })
         )

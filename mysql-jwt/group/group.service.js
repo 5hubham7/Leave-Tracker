@@ -6,14 +6,50 @@ module.exports = {
     getById,
     create,
     update,
+    getEmployee,
+    getNotGroupEmployee,
+    getEmployeeCount,
     delete: _delete,
 };
 
 async function getAll() {
     return await db.Group.findAll();
-    // return db.sequelize.query("SELECT * FROM `groups`", {
-    //     type: QueryTypes.SELECT,
-    // });
+}
+
+async function getEmployee(group_name) {
+    let query = `
+    SELECT e.employee_id, employee_name, country_name, threshold, g.group_id
+    FROM employees e, groups g, empgrps eg, countries c
+    WHERE e.employee_id = eg.employee_id and g.group_id = eg.group_id and c.country_id = e.country_id and g.group_name ='${group_name}'
+    `;
+    return db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
+}
+
+async function getEmployeeCount(group_name) {
+    let query = `
+    SELECT count(e.employee_id)
+    FROM employees e, groups g, empgrps eg, countries c
+    WHERE e.employee_id = eg.employee_id AND g.group_id = eg.group_id AND c.country_id = e.country_id AND g.group_name ='${group_name}'
+    `;
+    return db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
+}
+
+async function getNotGroupEmployee(manager_id, group_name) {
+    let query = `
+    SELECT e.employee_id, employee_name, country_name
+    FROM employees e, countries c
+    WHERE e.manager_id = ${manager_id} AND e.country_id = c.country_id AND e.employee_id
+    not in(select e.employee_id
+        FROM employees e,groups g, empgrps eg
+        WHERE e.employee_id = eg.employee_id AND g.group_id = eg.group_id AND group_name = '${group_name}')
+    `;
+    return db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
 }
 
 async function getById(group_id) {

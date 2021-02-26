@@ -1,5 +1,3 @@
-import React from "react";
-
 import { DashboardLayout } from "../components/Layout";
 
 const AboutPage = () => {

@@ -9,9 +9,16 @@ const groupService = require("./group.service");
 
 router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
-router.get("/:id", authorize(), getById);
-router.put("/:id", authorize(), updateSchema, update);
-router.delete("/:id", authorize(), _delete);
+router.get("/groupEmployees/:group_name", authorize(), getEmployee);
+router.get("/groupEmployeesCount/:group_name", authorize(), getEmployeeCount);
+router.get(
+    "/notGroupEmployees/:manager_id/:group_name",
+    authorize(),
+    getNotGroupEmployee
+);
+router.get("/:group_id", authorize(), getById);
+router.put("/:group_id", authorize(), updateSchema, update);
+router.delete("/:group_id", authorize(), _delete);
 
 module.exports = router;
 
@@ -45,9 +52,37 @@ function getAll(req, res, next) {
         .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }
 
+function getEmployee(req, res, next) {
+    groupService
+        .getEmployee(req.params.group_name)
+        .then((groups) =>
+            res.json({ status: 200, error: null, response: groups })
+        )
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
+}
+
+function getEmployeeCount(req, res, next) {
+    groupService
+        .getEmployee(req.params.group_name)
+        .then((groups) =>
+            res.json({ status: 200, error: null, response: groups })
+        )
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
+}
+
+function getNotGroupEmployee(req, res, next) {
+    console.log(req.params.manager_id, req.params.group_name);
+    groupService
+        .getNotGroupEmployee(req.params.manager_id, req.params.group_name)
+        .then((groups) =>
+            res.json({ status: 200, error: null, response: groups })
+        )
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
+}
+
 function getById(req, res, next) {
     groupService
-        .getById(req.params.id)
+        .getById(req.params.group_id)
         .then((group) =>
             res.json({ status: 200, error: null, response: group })
         )
@@ -64,7 +99,7 @@ function updateSchema(req, res, next) {
 
 function update(req, res, next) {
     groupService
-        .update(req.params.id, req.body)
+        .update(req.params.group_id, req.body)
         .then((group) =>
             res.json({ status: 200, error: null, response: group })
         )
@@ -73,7 +108,7 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     groupService
-        .delete(req.params.id)
+        .delete(req.params.group_id)
         .then(() =>
             res.json({
                 status: 200,

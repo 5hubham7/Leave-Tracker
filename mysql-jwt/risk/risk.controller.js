@@ -20,7 +20,7 @@ function createSchema(req, res, next) {
         start_date: Joi.date().required(),
         end_date: Joi.date().required(),
         leave_id: Joi.number().required(),
-        employee_id: Joi.number().required(),
+        group_id: Joi.number().required(),
     });
     validateRequest(req, next, schema);
 }
@@ -69,7 +69,7 @@ function updateSchema(req, res, next) {
         start_date: Joi.date().required().empty(""),
         end_date: Joi.date().required().empty(""),
         leave_id: Joi.number().empty(),
-        employee_id: Joi.number().empty(),
+        group_id: Joi.number().empty(),
     });
     validateRequest(req, next, schema);
 }

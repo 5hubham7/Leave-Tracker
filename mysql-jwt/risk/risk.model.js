@@ -18,12 +18,12 @@ module.exports = (sequelize) => {
                 key: "leave_id",
             },
         },
-        employee_id: {
+        group_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: "Employees",
-                key: "employee_id",
+                model: "Groups",
+                key: "group_id",
             },
         },
     };
@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
 
     Risk.associate = function (models) {
         Risk.belongsTo(models.Leave, { foreignKey: "leave_id" });
-        Risk.belongsTo(models.Employee, { foreignKey: "employee_id" });
+        Risk.belongsTo(models.Group, { foreignKey: "group_id" });
     };
 
     return Risk;
