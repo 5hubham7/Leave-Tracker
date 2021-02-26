@@ -10,6 +10,11 @@ const leaveService = require("./leave.service");
 router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
 router.get("/getbyname", authorize(), getByName);
+router.get(
+    "/getEmployeeLeaves/:group_id/:start_date/:end_date",
+    authorize(),
+    getEmployeeLeaves
+);
 router.get("/:leave_id", authorize(), getById);
 router.put("/:leave_id", authorize(), updateSchema, update);
 router.delete("/:leave_id", authorize(), _delete);
@@ -68,6 +73,23 @@ function getByName(req, res, next) {
                 status: 200,
                 error: null,
                 response: leave,
+            })
+        )
+        .catch((err) => res.json({ status: 405, error: err, responce: null }));
+}
+
+function getEmployeeLeaves(req, res, next) {
+    leaveService
+        .getEmployeeLeaves(
+            req.params.group_id,
+            req.params.start_date,
+            req.params.end_date
+        )
+        .then((leaves) =>
+            res.json({
+                status: 200,
+                error: null,
+                response: leaves,
             })
         )
         .catch((err) => res.json({ status: 405, error: err, responce: null }));

@@ -5,6 +5,7 @@ module.exports = {
     getAll,
     getById,
     getByName,
+    getEmployeeLeaves,
     create,
     update,
     delete: _delete,
@@ -26,6 +27,15 @@ async function getByName(employee_name) {
         "SELECT * FROM leaves WHERE employee_id in(SELECT employee_id FROM employees where employee_name = '" +
             employee_name +
             "');",
+        {
+            type: QueryTypes.SELECT,
+        }
+    );
+}
+
+async function getEmployeeLeaves(group_id, start_date, end_date) {
+    return await db.sequelize.query(
+        `SELECT l.start_date,l.end_date, l.employee_id FROM empgrps eg,leaves l where eg.employee_id = l.employee_id and group_id = ${group_id} and start_date BETWEEN '${start_date}' AND '${end_date}' and end_date BETWEEN '${start_date}' AND '${end_date}'`,
         {
             type: QueryTypes.SELECT,
         }
