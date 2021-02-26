@@ -32,8 +32,35 @@ async function getByName(employee_name) {
     );
 }
 
+function getDateInFormat(d) {
+    var dt = new Date(d);
+    var dd = dt.getDate();
+    var mm = dt.getMonth() + 1;
+    var yyyy = dt.getFullYear();
+    if (dd < 10) {
+        dd = "0" + dd;
+    }
+    if (mm < 10) {
+        mm = "0" + mm;
+    }
+    return yyyy + "-" + mm + "-" + dd;
+}
+
 async function create(params) {
-    await db.Leave.create(params);
+    params.start_date = getDateInFormat(params.start_date);
+    params.end_date = getDateInFormat(params.end_date);
+
+    let query = `
+    SELECT * FROM leaves
+    WHERE start_date = '${params.start_date}' AND end_date = '${params.end_date}' AND employee_id= ${params.employee_id}
+    `;
+    let result = await db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
+
+    if (Object.keys(result).length === 0) {
+        await db.Leave.create(params);
+    } else throw "Leave already exists!";
 }
 
 async function update(leave_id, params) {

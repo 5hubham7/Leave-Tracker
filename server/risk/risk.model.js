@@ -10,13 +10,9 @@ module.exports = (sequelize) => {
         },
         start_date: { type: DataTypes.DATE, allowNull: false },
         end_date: { type: DataTypes.DATE, allowNull: false },
-        leave_id: {
-            type: DataTypes.INTEGER,
+        risk_type: {
+            type: DataTypes.STRING,
             allowNull: false,
-            references: {
-                model: "Leaves",
-                key: "leave_id",
-            },
         },
         group_id: {
             type: DataTypes.INTEGER,
@@ -31,7 +27,6 @@ module.exports = (sequelize) => {
     var Risk = sequelize.define("Risk", attributes);
 
     Risk.associate = function (models) {
-        Risk.belongsTo(models.Leave, { foreignKey: "leave_id" });
         Risk.belongsTo(models.Group, { foreignKey: "group_id" });
     };
 

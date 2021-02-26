@@ -19,13 +19,13 @@ function createSchema(req, res, next) {
     const schema = Joi.object({
         start_date: Joi.date().required(),
         end_date: Joi.date().required(),
-        leave_id: Joi.number().required(),
+        risk_type: Joi.string().required(),
         group_id: Joi.number().required(),
     });
     validateRequest(req, next, schema);
 }
 
-function create(req, res, next) {
+function create(req, res) {
     riskService
         .create(req.body)
         .then(() =>
@@ -68,7 +68,7 @@ function updateSchema(req, res, next) {
     const schema = Joi.object({
         start_date: Joi.date().required().empty(""),
         end_date: Joi.date().required().empty(""),
-        leave_id: Joi.number().empty(),
+        risk_type: Joi.string().empty(""),
         group_id: Joi.number().empty(),
     });
     validateRequest(req, next, schema);

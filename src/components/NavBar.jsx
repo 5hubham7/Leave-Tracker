@@ -5,8 +5,8 @@ export const Navbar = () => {
     const history = useHistory();
 
     return (
-        <div className="shadow-lg mt-3">
-            <div className="text-center p-1 bg-dark justify-content-center">
+        <div className="shadow-lg bg-dark mt-3">
+            <div className="text-center pt-2 bg-dark justify-content-center">
                 <h2
                     className="h2 fw-bold text-white text-uppercase"
                     onClick={() => {
@@ -19,7 +19,7 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
                 <div className="container-fluid">
                     <button
-                        className="navbar-toggler my-2"
+                        className="navbar-toggler my-2 rounded-pill border"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup"
@@ -30,10 +30,10 @@ export const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div
-                        className="collapse navbar-collapse justify-content-around"
+                        className="collapse navbar-collapse justify-content-center"
                         id="navbarNavAltMarkup"
                     >
-                        <div className="navbar-nav ">
+                        <div className="navbar-nav text-center">
                             <h5
                                 className="nav-link"
                                 id="dashboard"

@@ -40,15 +40,19 @@ a {
     position: relative;
     background-color: darkgray;
 }
+
 .fc-header-toolbar {
     background-color: dimgray;
 }
+
 .fc .fc-toolbar.fc-header-toolbar {
     margin-bottom: 1rem;
 }
+
 .fc .fc-button-primary:not(:disabled).fc-button-active {
     background-color: #212529;
 }
+
 .fc .fc-button {
     font-weight: bold;
     text-transform: uppercase;
@@ -56,9 +60,11 @@ a {
     border-radius: 2rem;
     margin: 3px;
 }
+
 .fc-button:hover {
     background-color: #212529;
 }
+
 .fc-toolbar-title {
     font-weight: bold;
     color: white;
