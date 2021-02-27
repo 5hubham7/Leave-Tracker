@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
     var Country = sequelize.define("Country", attributes);
 
     Country.associate = function (models) {
-        Country.hasMany(models.PublicHoliday);
+        Country.hasMany(models.Holiday);
         Country.hasMany(models.Employee);
     };
 

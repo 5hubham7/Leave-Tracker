@@ -9,11 +9,15 @@ import GroupsPage from "./groups";
 import ChartsPage from "./charts";
 import AboutPage from "./about";
 import SettingsPage from "./settings";
+import LoginPage from "./login";
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
+                <Route path="/login">
+                    <LoginPage />
+                </Route>
                 <Route path="/dashboard">
                     <DashboardPage />
                 </Route>

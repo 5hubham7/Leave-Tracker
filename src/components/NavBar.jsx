@@ -5,17 +5,7 @@ export const Navbar = () => {
     const history = useHistory();
 
     return (
-        <div className="shadow-lg bg-dark mt-3">
-            <div className="text-center pt-2 bg-dark justify-content-center">
-                <h2
-                    className="h2 fw-bold text-white text-uppercase"
-                    onClick={() => {
-                        history.push("/home");
-                    }}
-                >
-                    Leave Tracker
-                </h2>
-            </div>
+        <div className="shadow-lg bg-dark">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
                 <div className="container-fluid">
                     <button

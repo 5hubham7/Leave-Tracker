@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         public_holiday_name: { type: DataTypes.STRING, allowNull: false },
-        public_holiday_date: { type: DataTypes.DATE, allowNull: false },
+        public_holiday_date: { type: DataTypes.DATEONLY, allowNull: false },
         country_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -20,11 +20,11 @@ module.exports = (sequelize) => {
         },
     };
 
-    var PublicHoliday = sequelize.define("PublicHoliday", attributes);
+    var Holiday = sequelize.define("Holiday", attributes);
 
-    PublicHoliday.associate = function (models) {
-        PublicHoliday.belongsTo(models.Country, { foreignKey: "country_id" });
+    Holiday.associate = function (models) {
+        Holiday.belongsTo(models.Country, { foreignKey: "country_id" });
     };
 
-    return PublicHoliday;
+    return Holiday;
 };

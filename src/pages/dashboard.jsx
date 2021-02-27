@@ -9,7 +9,7 @@ const DashboardPage = () => {
             <div className="">
                 <div className="row">
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">Leaves</h5>
@@ -34,7 +34,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">Risks</h5>
@@ -59,7 +59,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">Groups</h5>
@@ -86,7 +86,7 @@ const DashboardPage = () => {
                 </div>
                 <div className="row">
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">Charts</h5>
@@ -110,7 +110,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">Settings</h5>
@@ -134,7 +134,7 @@ const DashboardPage = () => {
                         </div>
                     </div>
                     <div className="col-lg-4 p-2">
-                        <div className="card bg-light shadow-lg">
+                        <div className="card bg-light bg-gradient shadow-lg">
                             <div className="card-body">
                                 <div className="card-title p-2">
                                     <h5 className="h5 fw-bold">About</h5>

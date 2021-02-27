@@ -1,8 +1,5 @@
 /* NAVBAR HEADER */
 
-.h2 {
-    letter-spacing: 7px;
-}
 .nav-link {
     cursor: pointer;
 }
@@ -68,4 +65,74 @@ a {
 .fc-toolbar-title {
     font-weight: bold;
     color: white;
+}
+
+/* LOGIN */
+
+.form-row.card {
+    width: 27rem;
+}
+
+.animated {
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.animated.spacing {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+}
+
+@-webkit-keyframes spacing {
+    0% {
+        letter-spacing: 15px;
+    }
+    100% {
+        letter-spacing: 10px;
+    }
+}
+
+@keyframes spacing {
+    0% {
+        letter-spacing: 15px;
+    }
+    100% {
+        letter-spacing: 10px;
+    }
+}
+
+.spacing {
+    -webkit-animation-name: spacing;
+    animation-name: spacing;
+}
+
+.login {
+    height: 89vh;
 }

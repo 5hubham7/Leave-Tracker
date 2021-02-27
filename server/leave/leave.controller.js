@@ -34,7 +34,11 @@ function create(req, res, next) {
     leaveService
         .create(req.body)
         .then(() =>
-            res.json({ status: 200, error: null, response: "Added successful" })
+            res.json({
+                status: 200,
+                error: null,
+                response: "Added successfully!",
+            })
         )
         .catch((err) => res.json({ status: 405, error: err, responce: null }));
 }

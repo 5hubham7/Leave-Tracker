@@ -8,10 +8,10 @@ import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 
-export default class Calendar extends React.Component {
-    calendarComponentRef = React.createRef();
+export default function Calendar() {
+    const calendarComponentRef = React.createRef();
 
-    state = {
+    var state = {
         calendarWeekends: true,
         calendarEvents: [
             {
@@ -26,36 +26,30 @@ export default class Calendar extends React.Component {
         ],
     };
 
-    render() {
-        return (
-            <div className="bg-light shadow-lg font-weight-bold">
-                <div className="text-uppercase ">
-                    <FullCalendar
-                        defaultView="dayGridMonth"
-                        headerToolbar={{
-                            left: "prev,next",
-                            center: "title",
-                            right: "today",
-                        }}
-                        plugins={[
-                            dayGridPlugin,
-                            timeGridPlugin,
-                            interactionPlugin,
-                        ]}
-                        editable={true}
-                        selectable={true}
-                        selectMirror={true}
-                        dayMaxEvents={true}
-                        ref={this.calendarComponentRef}
-                        weekends={this.state.calendarWeekends}
-                        events={this.state.calendarEvents}
-                        // dateClick={this.handleDateClick}
-                        height="490px"
-                    />
-                </div>
+    return (
+        <div className="bg-light shadow-lg font-weight-bold">
+            <div className="text-uppercase ">
+                <FullCalendar
+                    defaultView="dayGridMonth"
+                    headerToolbar={{
+                        left: "prev,next",
+                        center: "title",
+                        right: "today",
+                    }}
+                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                    editable={true}
+                    selectable={true}
+                    selectMirror={true}
+                    dayMaxEvents={true}
+                    ref={calendarComponentRef}
+                    weekends={state.calendarWeekends}
+                    events={state.calendarEvents}
+                    // dateClick={this.handleDateClick}
+                    height="490px"
+                />
             </div>
-        );
-    }
+        </div>
+    );
 
     // handleDateClick = (arg) => {
     //     if (prompt("Would you like to add an event to " + arg.dateStr + " ?")) {

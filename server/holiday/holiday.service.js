@@ -38,6 +38,6 @@ async function _delete(holiday_id) {
 
 async function getHoliday(holiday_id) {
     const holiday = await db.Holiday.findByPk(holiday_id);
-    if (!holiday) throw "Public Holiday not found";
+    if (!holiday) throw "Holiday not found";
     return holiday;
 }
