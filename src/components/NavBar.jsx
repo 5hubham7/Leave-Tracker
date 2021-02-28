@@ -18,7 +18,7 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
                     <button
-                        className="navbar-toggler my-2 rounded-pill border"
+                        className="navbar-toggler my-2 mx-3 rounded-pill border"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup"
