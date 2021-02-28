@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
         },
         start_date: { type: DataTypes.DATEONLY, allowNull: false },
         end_date: { type: DataTypes.DATEONLY, allowNull: false },
+        description: { type: DataTypes.STRING, allowNull: false },
         risk_type: {
             type: DataTypes.STRING,
             allowNull: false,

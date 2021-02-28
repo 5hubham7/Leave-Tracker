@@ -19,6 +19,7 @@ function createSchema(req, res, next) {
     const schema = Joi.object({
         start_date: Joi.date().required(),
         end_date: Joi.date().required(),
+        description: Joi.string().required(),
         risk_type: Joi.string().required(),
         group_id: Joi.number().required(),
     });
@@ -68,6 +69,7 @@ function updateSchema(req, res, next) {
     const schema = Joi.object({
         start_date: Joi.date().required().empty(""),
         end_date: Joi.date().required().empty(""),
+        description: Joi.string().empty(""),
         risk_type: Joi.string().empty(""),
         group_id: Joi.number().empty(),
     });

@@ -55,7 +55,7 @@ export default function Calendar() {
             delay: { show: 100, hide: 100 },
             animation: true,
             container: "body",
-            customClass: "bg-danger ",
+            customClass: "bg-primary fw-bold",
         });
     };
 
