@@ -33,11 +33,11 @@ function createSchema(req, res, next) {
 function create(req, res, next) {
     groupService
         .create(req.body)
-        .then(() =>
+        .then((response) =>
             res.json({
                 status: 200,
                 error: null,
-                response: "Added successfully!",
+                response: response,
             })
         )
         .catch((err) => res.json({ status: 405, error: err, responce: null }));

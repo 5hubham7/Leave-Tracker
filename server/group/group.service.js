@@ -57,7 +57,7 @@ async function getById(group_id) {
 }
 
 async function create(params) {
-    await db.Group.create(params);
+    return await db.Group.create(params);
 }
 
 async function update(group_id, params) {

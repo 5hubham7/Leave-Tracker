@@ -10,7 +10,7 @@ export const DashboardLayout = ({ children }) => {
             <div className="container">
                 <Logo />
                 <Navbar />
-                <div className="">{children}</div>
+                <div className="bg">{children}</div>
             </div>
         </BodyWrapper>
     );

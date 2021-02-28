@@ -4,9 +4,18 @@ import { useHistory } from "react-router-dom";
 export const Navbar = () => {
     const history = useHistory();
 
+    const logout = () => {
+        localStorage.removeItem("token");
+        if (localStorage.removeItem("token") == null) {
+            setTimeout(() => {
+                history.push("/login");
+            }, 1000);
+        }
+    };
+
     return (
         <div className="shadow-lg bg-dark">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container-fluid">
                     <button
                         className="navbar-toggler my-2 rounded-pill border"
@@ -20,7 +29,7 @@ export const Navbar = () => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div
-                        className="collapse navbar-collapse justify-content-center"
+                        className="collapse navbar-collapse"
                         id="navbarNavAltMarkup"
                     >
                         <div className="navbar-nav text-center">
@@ -87,17 +96,19 @@ export const Navbar = () => {
                             >
                                 Settings
                             </h5>
-                            <h5
-                                className="nav-link text-danger"
-                                id="logout"
-                                onClick={() => {
-                                    history.push("/settings");
-                                }}
-                            >
-                                Logout
-                            </h5>
                         </div>
                     </div>
+                </div>
+                <div className="d-flex justify-content-end">
+                    <h5
+                        className="btn btn-danger text-uppercase mx-3 mt-2"
+                        id="logout"
+                        onClick={() => {
+                            logout();
+                        }}
+                    >
+                        Logout
+                    </h5>
                 </div>
             </nav>
         </div>

@@ -7,7 +7,7 @@ const errorHandler = require("_middleware/error-handler");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ credentials: true, origin: "*" }));
 
 // api routes
 app.use("/managers", require("./manager/manager.controller"));

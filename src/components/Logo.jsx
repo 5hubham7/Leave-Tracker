@@ -5,7 +5,7 @@ export const Logo = () => {
     const history = useHistory();
 
     return (
-        <div className="text-center p-2 mt-2 bg-dark justify-content-center">
+        <div className="text-center p-2 mt-2 bg-dark">
             <h2
                 className="h2 fw-bold text-white text-uppercase animated spacing"
                 onClick={() => {
