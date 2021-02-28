@@ -15,7 +15,7 @@ export const Navbar = () => {
 
     return (
         <div className="shadow-lg bg-dark">
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
                     <button
                         className="navbar-toggler my-2 rounded-pill border"
@@ -101,7 +101,7 @@ export const Navbar = () => {
                 </div>
                 <div className="d-flex justify-content-end">
                     <h5
-                        className="btn btn-danger text-uppercase mx-3 mt-2"
+                        className="btn btn-danger text-uppercase mx-4 mt-2"
                         id="logout"
                         onClick={() => {
                             logout();
