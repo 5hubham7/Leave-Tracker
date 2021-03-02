@@ -1,7 +1,7 @@
 .bg {
     background-color: #212529;
     background-image: linear-gradient(0deg, #333333 0%, #212529 74%);
-    height: max-content;
+    height: 90vh;
 }
 
 /* NAVBAR HEADER */
@@ -9,33 +9,17 @@
 .nav-link {
     cursor: pointer;
 }
-
-/* SIDE NAVIGATION TWEAKS */
-ol,
-ul {
-    padding: 0;
-}
-
-.side-navigation-panel-select-option-wrap,
-.font-medium {
-    color: black;
-    font-weight: 600;
-}
-
-.border-pink-500 {
-    border-color: black;
-}
-
-.border-l-2 {
-    border-left-width: 3px;
-}
-
 /* CALENDAR TWEAKS */
 
 a {
     color: black;
     text-decoration: none;
-    font-weight: bold;
+}
+
+.fc-event-title-container {
+    text-align: center;
+    padding: 2px;
+    cursor: pointer;
 }
 
 .fc-view-harness {
@@ -44,33 +28,32 @@ a {
     background-color: darkgray;
 }
 
-.fc-header-toolbar {
-    background-color: dimgray;
-}
-
 .fc .fc-toolbar.fc-header-toolbar {
+    background-color: rgb(80, 80, 80);
     margin-bottom: 1rem;
 }
 
-.fc .fc-button-primary:not(:disabled).fc-button-active {
+.fc-toolbar-title {
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.fc .fc-button-primary:disabled {
     background-color: #212529;
 }
 
 .fc .fc-button {
     font-weight: bold;
     text-transform: uppercase;
-    background-color: black;
+    background-color: #000000;
     border-radius: 2rem;
+    border: none;
     margin: 3px;
 }
 
-.fc-button:hover {
+.fc .fc-button:hover {
     background-color: #212529;
-}
-
-.fc-toolbar-title {
-    font-weight: bold;
-    color: white;
 }
 
 /* LOGIN */

@@ -11,7 +11,7 @@ router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
 router.get("/:empgrp_id", authorize(), getById);
 router.put("/:empgrp_id", authorize(), updateSchema, update);
-router.delete("/:empgrp_id", authorize(), _delete);
+router.delete("/:employee_id/:group_id", authorize(), _delete);
 
 module.exports = router;
 
@@ -73,7 +73,7 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     empgrpService
-        .delete(req.params.empgrp_id)
+        .delete(req.params.employee_id, req.params.group_id)
         .then(() =>
             res.json({
                 status: 200,

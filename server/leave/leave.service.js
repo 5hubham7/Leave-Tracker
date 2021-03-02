@@ -12,10 +12,12 @@ module.exports = {
 };
 
 async function getAll() {
-    return await db.Leave.findAll();
-    // return db.sequelize.query("SELECT * FROM `leaves`", {
-    //     type: QueryTypes.SELECT,
-    // });
+    return db.sequelize.query(
+        "SELECT employee_name as title,start_date as start, end_date as end FROM leaves l, employees e where e.employee_id = l.employee_id",
+        {
+            type: QueryTypes.SELECT,
+        }
+    );
 }
 
 async function getById(leave_id) {
@@ -61,8 +63,7 @@ async function create(params) {
     params.end_date = getDateInFormat(params.end_date);
 
     let query = `
-    SELECT * FROM leaves
-    WHERE start_date = '${params.start_date}' AND end_date = '${params.end_date}' AND employee_id= ${params.employee_id}
+    SELECT * FROM leaves WHERE start_date = '${params.start_date}' AND end_date = '${params.end_date}' AND employee_id= ${params.employee_id}
     `;
     let result = await db.sequelize.query(query, {
         type: QueryTypes.SELECT,

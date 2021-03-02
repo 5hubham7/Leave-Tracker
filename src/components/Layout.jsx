@@ -8,9 +8,9 @@ export const DashboardLayout = ({ children }) => {
     return (
         <BodyWrapper>
             <div className="container">
-                <Logo />
+                {/* <Logo /> */}
                 <Navbar />
-                <div className="bg">{children}</div>
+                <div className="bg animated fadeIn">{children}</div>
             </div>
         </BodyWrapper>
     );

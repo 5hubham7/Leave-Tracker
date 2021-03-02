@@ -1,6 +1,5 @@
 ﻿const db = require("../_helpers/db");
 const { QueryTypes } = require("sequelize");
-const { param } = require("./risk.controller");
 
 module.exports = {
     getAll,
@@ -12,9 +11,7 @@ module.exports = {
 
 async function getAll() {
     let query = `
-    SELECT r.risk_id, r.start_date, r.end_date, r.risk_type, g.group_name, g.threshold 
-    FROM risks r, ltdb.groups g 
-    WHERE r.group_id = g.group_id;
+    SELECT risk_type AS color, start_date AS start, end_date AS end,group_name AS title, description FROM risks r, ltdb.groups g where r.group_id = g.group_id;
     `;
     return db.sequelize.query(query, {
         type: QueryTypes.SELECT,

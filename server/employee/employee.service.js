@@ -24,11 +24,7 @@ async function getById(employee_id) {
 
 async function getByGroupName(group_name) {
     let query = `
-    SELECT group_name, employee_name, threshold
-    FROM employees 
-    LEFT JOIN empgrps ON (employees.employee_id=empgrps.employee_id)
-    LEFT JOIN leave_tracker_test.groups ON (leave_tracker_test.groups.group_id=empgrps.group_id)
-    where leave_tracker_test.groups.group_name = ${group_name};
+    SELECT group_name, employee_name, threshold FROM employees LEFT JOIN empgrps ON (employees.employee_id=empgrps.employee_id) LEFT JOIN leave_tracker_test.groups ON (leave_tracker_test.groups.group_id=empgrps.group_id) WHERE leave_tracker_test.groups.group_name = ${group_name};
     `;
     console.log(query);
     return await db.sequelize.query(query, { type: QueryTypes.SELECT });

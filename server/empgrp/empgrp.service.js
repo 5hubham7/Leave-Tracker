@@ -4,6 +4,7 @@ const { QueryTypes } = require("sequelize");
 module.exports = {
     getAll,
     getById,
+    getTotalGroupEmployee,
     create,
     update,
     delete: _delete,
@@ -11,13 +12,19 @@ module.exports = {
 
 async function getAll() {
     return await db.EmpGrp.findAll();
-    // return db.sequelize.query("SELECT * FROM `empgrps`", {
-    //     type: QueryTypes.SELECT,
-    // });
 }
 
 async function getById(empgrp_id) {
     return await getEmpGrp(empgrp_id);
+}
+
+async function getTotalGroupEmployee() {
+    let query = `
+    SELECT eg.group_id, g.group_name, count(eg.group_id) FROM empgrps eg, ltdb.groups g WHERE eg.group_id = g.group_id GROUP BY group_id;
+    `;
+    return db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
 }
 
 async function create(params) {
@@ -30,9 +37,23 @@ async function update(empgrp_id, params) {
     await empgrp.save();
 }
 
-async function _delete(empgrp_id) {
-    const empgrp = await getEmpGrp(empgrp_id);
-    await empgrp.destroy();
+async function _delete(employee_id, group_id) {
+    let result = await db.EmpGrp.findAll({
+        where: {
+            employee_id: employee_id,
+            group_id: group_id,
+        },
+    });
+    if (result.length !== 0) {
+        return db.EmpGrp.destroy({
+            where: {
+                employee_id: employee_id,
+                group_id: group_id,
+            },
+        });
+    } else {
+        throw "Empgrp not found";
+    }
 }
 
 async function getEmpGrp(empgrp_id) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Logo } from "../components/Logo";
-import postData from "../helpers/ApiHelper";
+import postRequest, { getRequest } from "../helpers/ApiHelper";
 
 const LoginPage = () => {
     let history = useHistory();
@@ -54,8 +54,10 @@ const LoginPage = () => {
             manager_password: managerData.manager_password,
         };
 
-        await postData("http://localhost:3000/managers/register", data)
+        await getRequest("http://localhost:3000/managers/register", data)
             .then(async (response) => {
+                console.log(response);
+
                 if (response.status === 200) {
                     signupMessage.innerHTML = `<div class="alert alert-success text-center">"Signed up successfully!"</div>`;
 
@@ -73,26 +75,25 @@ const LoginPage = () => {
             });
     };
 
-    const login = async () => {
+    const login = () => {
         let loginButton = document.getElementById("loginButton");
         let loginMessage = document.getElementById("loginMessage");
         loginButton.setAttribute("disabled", true);
-        let data = {
+
+        let body = {
             manager_email: managerData.email,
             manager_password: managerData.password,
         };
+        console.log(body);
 
-        await postData("http://localhost:3000/managers/authenticate", data)
+        postRequest("http://localhost:3000/managers/authenticate", body)
             .then((response) => {
+                console.log(response);
                 if (response.status === 200) {
                     response = response.response;
                     loginMessage.innerHTML = `<div class="alert alert-success text-center">Logged in successfully!</div>`;
 
                     setTimeout(() => {
-                        history.push({
-                            pathname: "/dashboard",
-                            state: { managerData: managerData },
-                        });
                         localStorage.setItem("manager_id", response.manager_id);
                         setManager({
                             manager_id: response.manager_id,
@@ -108,6 +109,10 @@ const LoginPage = () => {
                         localStorage.setItem("token", response.token);
                         setManager({
                             token: response.token,
+                        });
+                        history.push({
+                            pathname: "/dashboard",
+                            state: { managerData: managerData },
                         });
                     }, 3000);
                 } else {

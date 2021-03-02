@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import RiskCalendar from "../components/RiskCalendar";
 
 import { DashboardLayout } from "../components/Layout";
 
@@ -20,7 +21,7 @@ const RisksPage = () => {
     });
     return (
         <DashboardLayout>
-            <h2>Risks Page</h2>
+            <RiskCalendar />
         </DashboardLayout>
     );
 };

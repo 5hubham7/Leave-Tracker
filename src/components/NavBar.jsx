@@ -17,6 +17,14 @@ export const Navbar = () => {
         <div className="shadow-lg bg-dark">
             <nav className="navbar navbar-expand-lg navbar-dark">
                 <div className="container-fluid">
+                    <h2
+                        className="navbar-brand h2 fw-bold text-uppercase animated spacing"
+                        onClick={() => {
+                            history.push("/home");
+                        }}
+                    >
+                        Leave Tracker
+                    </h2>
                     <button
                         className="navbar-toggler my-2 mx-3 rounded-pill border"
                         type="button"
@@ -32,7 +40,7 @@ export const Navbar = () => {
                         className="collapse navbar-collapse"
                         id="navbarNavAltMarkup"
                     >
-                        <div className="navbar-nav text-center">
+                        <div className="navbar-nav">
                             <h5
                                 className="nav-link"
                                 id="dashboard"
@@ -101,7 +109,7 @@ export const Navbar = () => {
                 </div>
                 <div className="d-flex justify-content-end">
                     <h5
-                        className="btn btn-danger text-uppercase mx-4 mt-2"
+                        className="btn btn-danger bg-gradient btn-sm px-2 py-2 rounded-pill text-uppercase fw-bold mx-1 mt-2"
                         id="logout"
                         onClick={() => {
                             logout();

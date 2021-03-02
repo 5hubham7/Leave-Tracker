@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import LeaveCalendar from "../components/LeaveCalendar";
 
 import { DashboardLayout } from "../components/Layout";
-import Calendar from "../components/Calendar";
-import { useHistory } from "react-router-dom";
 
 const LeavesPage = () => {
     const history = useHistory();
@@ -21,9 +21,7 @@ const LeavesPage = () => {
     });
     return (
         <DashboardLayout>
-            <div className="row p-4 pt-2">
-                <Calendar />
-            </div>
+            <LeaveCalendar />
         </DashboardLayout>
     );
 };

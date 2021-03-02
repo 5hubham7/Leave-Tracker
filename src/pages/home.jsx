@@ -18,11 +18,7 @@ const HomePage = () => {
     useEffect(() => {
         checkLogin();
     });
-    return (
-        <DashboardLayout>
-            <h2>Home Page</h2>
-        </DashboardLayout>
-    );
+    return <DashboardLayout></DashboardLayout>;
 };
 
 export default HomePage;

@@ -34,7 +34,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/leaves");
                                     }}
@@ -58,7 +58,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/risks");
                                     }}
@@ -83,7 +83,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/groups");
                                     }}
@@ -112,7 +112,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/charts");
                                     }}
@@ -136,7 +136,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/settings");
                                     }}
@@ -160,7 +160,7 @@ const DashboardPage = () => {
                             </div>
                             <div className="text-right p-2">
                                 <button
-                                    className="btn btn-dark fw-bold"
+                                    className="btn btn-dark rounded-pill fw-bold"
                                     onClick={() => {
                                         history.push("/about");
                                     }}
