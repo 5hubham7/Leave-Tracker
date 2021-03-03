@@ -24,15 +24,13 @@ async function getById(leave_id) {
     return await getLeave(leave_id);
 }
 
-async function getByName(employee_name) {
-    return await db.sequelize.query(
-        "SELECT * FROM leaves WHERE employee_id in(SELECT employee_id FROM employees where employee_name = '" +
-            employee_name +
-            "');",
-        {
-            type: QueryTypes.SELECT,
-        }
-    );
+async function getByName(group_name) {
+    let query = `
+    SELECT start_date as start, end_date as end, employee_name as title, color FROM leaves l, employees e WHERE l.employee_id = e.employee_id and l.employee_id in (SELECT employee_id FROM ltdb.groups g, empgrps eg where g.group_id = eg.group_id and group_name = '${group_name}');
+    `;
+    return await db.sequelize.query(query, {
+        type: QueryTypes.SELECT,
+    });
 }
 
 async function getEmployeeLeaves(group_id, start_date, end_date) {

@@ -6,11 +6,15 @@ import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClic
 import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 
+import $ from "jquery";
 import { Tooltip } from "bootstrap";
 import { getRequest } from "../helpers/ApiHelper";
+import { useHistory } from "react-router-dom";
 
 export default function RiskCalendar() {
     const [riskEvents, setRiskEvents] = useState([]);
+
+    const history = useHistory();
 
     const getRiskEvents = () => {
         getRequest(
@@ -22,7 +26,11 @@ export default function RiskCalendar() {
     };
 
     const riskClickHandler = (args) => {
-        console.log(args.event._def.title);
+        localStorage.setItem("currentGroup", args.event._def.title);
+        $(".tooltip").hide();
+        history.push({
+            pathname: "/Leaves",
+        });
     };
 
     const showTooltip = (arg) => {
@@ -50,23 +58,7 @@ export default function RiskCalendar() {
 
     return (
         <div>
-            <div className="row d-flex justify-content-center">
-                <div className="col-lg-6 p-3">
-                    <select
-                        id="groupSelect"
-                        className="form-select"
-                        placeholder="select a group"
-                    >
-                        <option value="">a</option>
-                        <option value="">b</option>
-                        <option value="">c</option>
-                        <option value="">d</option>
-                        <option value="">e</option>
-                    </select>
-                </div>
-            </div>
             <FullCalendar
-                defaultView="dayGridMonth"
                 viewClassNames="text-uppercase fw-bold"
                 moreLinkClassNames="bg-primary"
                 headerToolbar={{
@@ -77,12 +69,12 @@ export default function RiskCalendar() {
                 plugins={[dayGridPlugin, interactionPlugin]}
                 eventDidMount={showTooltip}
                 selectMirror={true}
-                dayMaxEvents={2}
+                dayMaxEvents={3}
                 weekends={true}
                 events={riskEvents}
                 eventClick={riskClickHandler}
                 fixedWeekCount={false}
-                height="80vh"
+                height="90vh"
             />
         </div>
     );

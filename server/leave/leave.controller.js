@@ -9,7 +9,7 @@ const leaveService = require("./leave.service");
 
 router.post("/", createSchema, create);
 router.get("/", authorize(), getAll);
-router.get("/getbyname", authorize(), getByName);
+router.get("/getbyname/:group_name", authorize(), getByName);
 router.get(
     "/getEmployeeLeaves/:group_id/:start_date/:end_date",
     authorize(),
@@ -71,7 +71,7 @@ function getById(req, res, next) {
 
 function getByName(req, res, next) {
     leaveService
-        .getByName(req.body.employee_name)
+        .getByName(req.params.group_name)
         .then((leave) =>
             res.json({
                 status: 200,

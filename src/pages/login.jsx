@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Logo } from "../components/Logo";
 import postRequest, { getRequest } from "../helpers/ApiHelper";
 
 const LoginPage = () => {
@@ -59,19 +58,19 @@ const LoginPage = () => {
                 console.log(response);
 
                 if (response.status === 200) {
-                    signupMessage.innerHTML = `<div class="alert alert-success text-center">"Signed up successfully!"</div>`;
+                    signupMessage.innerHTML = `<div className="alert alert-success text-center">"Signed up successfully!"</div>`;
 
                     setTimeout(() => {
                         goToLogin();
                     }, 2000);
                 } else {
-                    signupMessage.innerHTML = `<div class="alert alert-danger text-center">${response.error}!</div>`;
+                    signupMessage.innerHTML = `<div className="alert alert-danger text-center">${response.error}!</div>`;
                 }
                 signupMessage.removeAttribute("disabled");
             })
             .catch(() => {
                 signupMessage.removeAttribute("disabled");
-                signupMessage.innerHTML = `<div class="alert alert-danger text-center">"Something went wrong!"</div>`;
+                signupMessage.innerHTML = `<div className="alert alert-danger text-center">"Something went wrong!"</div>`;
             });
     };
 
@@ -91,7 +90,7 @@ const LoginPage = () => {
                 console.log(response);
                 if (response.status === 200) {
                     response = response.response;
-                    loginMessage.innerHTML = `<div class="alert alert-success text-center">Logged in successfully!</div>`;
+                    loginMessage.innerHTML = `<div className="alert alert-success text-center">Logged in successfully!</div>`;
 
                     setTimeout(() => {
                         localStorage.setItem("manager_id", response.manager_id);
@@ -116,13 +115,13 @@ const LoginPage = () => {
                         });
                     }, 3000);
                 } else {
-                    loginMessage.innerHTML = `<div class="alert alert-danger text-center">${response.error}</div>`;
+                    loginMessage.innerHTML = `<div className="alert alert-danger text-center">${response.error}</div>`;
                 }
                 loginButton.removeAttribute("disabled");
             })
             .catch(() => {
                 loginButton.removeAttribute("disabled");
-                loginMessage.innerHTML = `<div class="alert alert-danger text-center">Something went wrong!</div>`;
+                loginMessage.innerHTML = `<div className="alert alert-danger text-center">Something went wrong!</div>`;
             });
     };
 
@@ -132,8 +131,17 @@ const LoginPage = () => {
 
     return (
         <div className="container">
-            <Logo />
-            <div className="d-flex justify-content-center align-items-center bg login py-2">
+            <div className="d-flex justify-content-center align-items-center bg-dark p-3">
+                <h1
+                    className="h1 fw-bold text-white text-uppercase animated spacing"
+                    onClick={() => {
+                        history.push("/home");
+                    }}
+                >
+                    Leave Tracker
+                </h1>
+            </div>
+            <div className="d-flex justify-content-center align-items-center login bg py-2">
                 <div id="loginPage">
                     <div className="form-row card bg-dark bg-gradient border-success shadow-lg">
                         <div className="col p-5 pb-4">

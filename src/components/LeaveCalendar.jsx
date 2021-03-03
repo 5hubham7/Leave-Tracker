@@ -2,27 +2,52 @@ import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
+import { Tooltip } from "bootstrap";
+import { getRequest } from "../helpers/ApiHelper";
 
 import "@fullcalendar/common/main.css";
 import "@fullcalendar/daygrid/main.css";
 
-import { Tooltip } from "bootstrap";
-import { getRequest } from "../helpers/ApiHelper";
-
 export default function LeaveCalendar() {
     const [leaveEvents, setLeaveEvents] = useState([]);
 
-    const getLeaveEvents = () => {
+    const [groups, setGroups] = useState([]);
+
+    const [currentGroup, setCurrentGroup] = useState(
+        localStorage.getItem("currentGroup")
+    );
+
+    useEffect(() => {
+        console.log(currentGroup);
+        document.getElementById("groupSelect").value = currentGroup;
+    });
+
+    let groupList =
+        groups.length > 0 &&
+        groups.map((item, i) => {
+            return (
+                <option key={i} value={item.group_name}>
+                    {item.group_name}
+                </option>
+            );
+        }, this);
+
+    const getAllGroupNames = () => {
         getRequest(
-            "http://localhost:3000/leaves/",
+            "http://localhost:3000/groups/",
+            localStorage.getItem("token")
+        ).then((response) => {
+            setGroups(response.response);
+        });
+    };
+
+    const getLeaveEventsByGroupName = (group_name) => {
+        getRequest(
+            "http://localhost:3000/leaves/getbyname/" + group_name,
             localStorage.getItem("token")
         ).then((response) => {
             setLeaveEvents(response.response);
         });
-    };
-
-    const leaveClickHandler = (args) => {
-        console.log(args.event._def.title);
     };
 
     const showTooltip = (arg) => {
@@ -44,29 +69,49 @@ export default function LeaveCalendar() {
         });
     };
 
+    const onGroupSelected = (e) => {
+        setCurrentGroup(e.target.value);
+        getLeaveEventsByGroupName(e.target.value);
+    };
+
     useEffect(() => {
-        getLeaveEvents();
-    }, []);
+        getAllGroupNames();
+        getLeaveEventsByGroupName(currentGroup);
+    }, [currentGroup]);
 
     return (
-        <FullCalendar
-            defaultView="dayGridMonth"
-            viewClassNames="text-uppercase fw-bold"
-            moreLinkClassNames="bg-primary"
-            headerToolbar={{
-                left: "prev,next",
-                center: "title",
-                right: "today",
-            }}
-            plugins={[dayGridPlugin, interactionPlugin]}
-            eventDidMount={showTooltip}
-            selectMirror={true}
-            dayMaxEvents={2}
-            weekends={true}
-            events={leaveEvents}
-            eventClick={leaveClickHandler}
-            fixedWeekCount={false}
-            height="90vh"
-        />
+        <div>
+            <div className="row d-flex justify-content-center">
+                <div className="col-lg-6 p-3">
+                    <select
+                        id="groupSelect"
+                        className="form-select"
+                        placeholder="select a group"
+                        onChange={(e) => {
+                            onGroupSelected(e);
+                        }}
+                    >
+                        {groupList}
+                    </select>
+                </div>
+            </div>
+            <FullCalendar
+                viewClassNames="text-uppercase fw-bold"
+                moreLinkClassNames="bg-secondary text-white p-1"
+                headerToolbar={{
+                    left: "prev,next",
+                    center: "title",
+                    right: "today",
+                }}
+                plugins={[dayGridPlugin, interactionPlugin]}
+                eventDidMount={showTooltip}
+                selectMirror={true}
+                dayMaxEvents={2}
+                weekends={true}
+                events={leaveEvents}
+                fixedWeekCount={false}
+                height="80vh"
+            />
+        </div>
     );
 }
